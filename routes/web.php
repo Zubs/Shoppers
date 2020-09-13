@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,58 +20,29 @@ use App\Models\Product;
 */
 
 /*
-	1. Make a model
-	2. Seed the db
-	3. Make a controller for general pages
+    Static pages kinda -_-
 */
+Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 
-Route::get('/', function () {
-	$title = '';
-	$products = Product::inRandomOrder()->take(5)->get();
-    return view('welcome')->with([
-    	'title' => $title,
-    	'products' => $products,
-    ]);
-});
-Route::get('/about', function () {
-	$title = 'About Us';
-    return view('template.about')->with('title', $title);
-});
-Route::get('/cart', function () {
-	$title = 'Cart';
-    return view('template.cart')->with('title', $title);
-});
-Route::get('/checkout', function () {
-	$title = 'Checkout';
-    return view('template.checkout')->with('title', $title);
-});
-Route::get('/contact', function () {
-	$title = 'Contact Us';
-    return view('template.contact')->with('title', $title);
-});
-Route::get('/product/{slug}', function ($slug) {
-	$products = Product::where('slug', $slug)->get();
-	$title = $products[0]->name;
-    $others = Product::where('slug', '!=', $slug)->inRandomOrder()->take(5)->get();
-    return view('template.product')->with([
-    	'title' => $title,
-    	'products' => $products[0],
-        'others' => $others,
-    ]);
-});
-Route::get('/products', function () {
-	$title = 'Products';
-	$products = Product::inRandomOrder()->get();
-    return view('template.products')->with([
-    	'title' => $title,
-    	'products' => $products,
-    ]);
-});
-Route::get('/thanks', function () {
-	$title = 'Thank You';
-    return view('template.thanks')->with('title', $title);
-});
+/*
+    Cart routes
+*/
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+/*
+    Checkout route
+*/
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+/*
+    Product routes
+*/
+Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
+Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('products.show');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

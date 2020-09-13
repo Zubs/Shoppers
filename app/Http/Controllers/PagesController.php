@@ -15,72 +15,43 @@ class PagesController extends Controller
     public function index()
     {
         $title = '';
-        return view('welcome')->with('title', $title);
+        $products = Product::inRandomOrder()->take(5)->get();
+        return view('welcome')->with([
+            'title' => $title,
+            'products' => $products,
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the page for details of the company.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function about()
     {
-        //
+        $title = 'About Us';
+        return view('template.about')->with('title', $title);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the page for getting messages to the company.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function contact()
     {
-        //
+        $title = 'Contact Us';
+        return view('template.contact')->with('title', $title);
     }
 
     /**
-     * Display the specified resource.
+     * Display the page for greeting users of the company on buying a product or products.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function thanks()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $title = 'Thank You';
+        return view('template.thanks')->with('title', $title);
     }
 }

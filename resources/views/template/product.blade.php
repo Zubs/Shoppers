@@ -37,7 +37,7 @@
             </div>
 
             </div>
-            <p><a href="/cart" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+            <p><a href="{{ route('cart') }}" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
 
           </div>
         </div>
@@ -61,7 +61,7 @@
                       <img src="{{ asset('template/images/'.$other->slug.'.jpg') }}" alt="Image placeholder" class="img-fluid">
                     </figure>
                     <div class="block-4-text p-4">
-                      <h3><a href="/product/{{ $other->slug }}">{{ $other->name }}</a></h3>
+                      <h3><a href="{{ route('products.show', [$other->slug]) }}">{{ $other->name }}</a></h3>
                       <p class="mb-0">{{ $other->details }}</p>
                       <p class="text-primary font-weight-bold">{{ $other->presentPrice() }}</p>
                     </div>

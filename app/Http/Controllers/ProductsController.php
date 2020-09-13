@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductsController extends Controller
 {
@@ -13,7 +14,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Products';
+        $products = Product::inRandomOrder()->get();
+        return view('template.products')->with([
+            'title' => $title,
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -22,8 +28,15 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $products = Product::where('slug', $slug)->get();
+        $title = $products[0]->name;
+        $others = Product::where('slug', '!=', $slug)->inRandomOrder()->take(5)->get();
+        return view('template.product')->with([
+            'title' => $title,
+            'products' => $products[0],
+            'others' => $others,
+        ]);
     }
 }
