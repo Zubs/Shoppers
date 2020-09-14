@@ -8,6 +8,11 @@ use App\money_format;
 
 class Product extends Model
 {
+	public function categories()
+    {
+    	return $this->belongsTo('App\Models\Category');
+    }
+
     use HasFactory;
 
     public function presentPrice()

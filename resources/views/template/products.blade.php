@@ -73,9 +73,9 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>Men</span> <span class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                @foreach($categories as $category)
+                  <li class="mb-1"><a href="{{ route('products.index', ['category' => $category->slug]) }}" class="d-flex"><span>{{ $category->name }}</span> <span class="text-black ml-auto">({{ count($category->products) }})</span></a></li>
+                @endforeach
               </ul>
             </div>
 

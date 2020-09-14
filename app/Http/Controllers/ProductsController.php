@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductsController extends Controller
 {
@@ -14,11 +15,20 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $title = 'Products';
-        $products = Product::inRandomOrder()->get();
+        $categories = Category::all();
+        if (request()->category) {
+            $category = Category::where('slug', request()->category)->first();
+            // return $category[0]['name'];
+            $title = $category->name.'\'s Products';
+            $products = $category->products;
+        } else {
+            $title = 'Products';
+            $products = Product::inRandomOrder()->get();
+        };
         return view('template.products')->with([
             'title' => $title,
             'products' => $products,
+            'categories' => $categories,
         ]);
     }
 
