@@ -37,7 +37,7 @@
             </div>
 
             </div>
-            <p><a href="{{ route('cart') }}" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+            <p><a href="{{ route('cart.index') }}" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
 
           </div>
         </div>

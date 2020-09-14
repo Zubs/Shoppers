@@ -30,7 +30,7 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 /*
     Cart routes
 */
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 /*
     Checkout route

@@ -46,7 +46,7 @@
                     <div class="block-4-text p-4">
                       <h3><a href="{{ route('products.show', [$product->slug]) }}">{{ $product->name }}</a></h3>
                       <p class="mb-0">{{ $product->details }}</p>
-                      <p class="text-primary font-weight-bold">{{ $product->presentPrice() }}</p>
+                      <p class="text-primary font-weight-bold">₦{{ $product->presentPrice() }}</p>
                     </div>
                   </div>
                 </div>
