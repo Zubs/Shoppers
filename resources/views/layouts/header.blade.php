@@ -37,7 +37,7 @@
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
               <div class="site-logo">
-                <a href="{{ route('home') }}" class="js-logo-clone">Shoppers</a>
+                <a href="{{ route('pages.index') }}" class="js-logo-clone">Shoppers</a>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
       <nav class="site-navigation text-right text-md-center" role="navigation">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('pages.index') }}">Home</a></li>
             <li><a href="{{ route('about') }}">About</a></li>
             <li><a href="{{ route('products.index') }}">Shop</a></li>
             {{-- <li class="has-children">
@@ -85,7 +85,7 @@
       <div class="bg-light py-3">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 mb-0"><a href="{{ route('home') }}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{ $title }}</strong></div>
+            <div class="col-md-12 mb-0"><a href="{{ route('pages.index') }}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{ $title }}</strong></div>
           </div>
         </div>
       </div>

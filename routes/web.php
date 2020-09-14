@@ -22,7 +22,7 @@ use App\Http\Controllers\HomeController;
 /*
     Static pages kinda -_-
 */
-Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/', [PagesController::class, 'index'])->name('pages.index');
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
