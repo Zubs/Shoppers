@@ -15,15 +15,27 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        // Get All Product Categories
         $categories = Category::all();
+
+        // Filter Products By Category
         if (request()->category) {
             $category = Category::where('slug', request()->category)->first();
             // return $category[0]['name'];
-            $title = $category->name.'\'s Products';
-            $products = $category->products;
+            $title = $category ? $category->name.'\'s Products' : 'Products';
+            $products = $category ? $category->products : Product::inRandomOrder()->get();
         } else {
             $title = 'Products';
             $products = Product::inRandomOrder()->get();
+        };
+
+        // Filter Products By Price
+        if (request()->sort == 'low_high') {
+            $products = $products->sortBy('price');
+        } elseif (request()->sort == 'high_low') {
+            $products = $products->sortByDesc('price');
+        } else {
+            $products = $products;
         };
         return view('template.products')->with([
             'title' => $title,
