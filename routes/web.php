@@ -31,6 +31,8 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
     Cart routes
 */
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
+Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
 
 /*
     Checkout route

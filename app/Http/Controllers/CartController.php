@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -16,6 +17,18 @@ class CartController extends Controller
     {
         $title = 'Cart';
         return view('template.cart')->with('title', $title);
+    }
+
+    /**
+     * Deletes all the resources in the current cart.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function empty()
+    {
+        Cart::destroy();
+
+        return redirect()->route('cart.index')->with('success', 'Cart Emptied Successfully');
     }
 
     /**
@@ -36,7 +49,11 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cart::add($request->id, $request->name, $request->qty, $request->price, 0);
+
+        // print_r([$request->id, $request->name, $request->qty, $request->price, 0]);
+
+        return redirect()->route('cart.index')->with('success', 'Product Added To Cart Successfully');
     }
 
     /**

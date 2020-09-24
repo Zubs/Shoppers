@@ -3,6 +3,9 @@
 @section('content')
 	<div class="site-section">
       <div class="container">
+        @if(session()->has('success'))
+          <div class="alert alert-success">{{ session()->get('success') }}</div>
+        @endif
         <div class="row mb-5">
           <form class="col-md-12" method="post">
             <div class="site-blocks-table">
@@ -18,29 +21,37 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="{{ asset('template/images/cloth_2.jpg') }}" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Polo Shirt</h2>
-                    </td>
-                    <td>₦1500.00</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                      </div>
+                  @if(Cart::count() > 0)
+                    @foreach(Cart::content() as $product) 
+                      <tr>
+                        <td class="product-thumbnail">
+                          <img src="{{ asset('template/images/shoe_1.jpg') }}" alt="Image" class="img-fluid">
+                        </td>
+                        <td class="product-name">
+                          <h2 class="h5 text-black">{{ $product->name }}</h2>
+                        </td>
+                        <td>₦{{ $product->price }}</td>
+                        <td>
+                          <div class="input-group mb-3" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                              <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" class="form-control text-center" value="{{ $product->qty }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
+                          </div>
 
-                    </td>
-                    <td>₦1500.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                  </tr>
+                        </td>
+                        <td>₦{{ $product->price * $product->qty }}</td>
+                        <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                      </tr>
+                    @endforeach
+                  @else
+                    <tr>
+                      <td colspan="6"><h2>No Items In Cart</h2></td>
+                    </tr>
+                  @endif
                 </tbody>
               </table>
             </div>
@@ -50,11 +61,14 @@
         <div class="row">
           <div class="col-md-6">
             <div class="row mb-5">
-              <div class="col-md-6 mb-3 mb-md-0">
+              {{-- <div class="col-md-4 mb-3 mb-md-0">
                 <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+              </div> --}}
+              <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-sm btn-block" onclick="window.location='{{ route('cart.empty') }}'">Empty Cart</button>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                <button class="btn btn-outline-primary btn-sm btn-block" onclick="window.location='{{ route('products.index') }}'">Continue Shopping</button>
               </div>
             </div>
             <div class="row">
@@ -83,7 +97,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦1500.00</strong>
+                    <strong class="text-black">₦{{ Cart::subtotal() }}</strong>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -91,7 +105,7 @@
                     <span class="text-black">Tax</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦105.00</strong>
+                    <strong class="text-black">₦{{ Cart::tax() }}</strong>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -99,7 +113,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦1605.00</strong>
+                    <strong class="text-black">₦{{ Cart::total() }}</strong>
                   </div>
                 </div>
 
