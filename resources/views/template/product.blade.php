@@ -47,7 +47,7 @@
               <input type="hidden" name="id" value="{{ $products->id }}">
               <input type="hidden" name="name" value="{{ $products->name }}">
               <input type="hidden" name="price" value="{{ $products->presentPrice() }}">
-              <p><button class="buy-now btn btn-sm btn-primary" type="submit">Add To Cart</button></p>
+              <p><button class="buy-now btn btn-sm btn-primary" type="submit">Add To Cart</button> <button class="btn btn-outline-primary btn-sm"><i class="icon icon-heart-o"></i></button></p>
             </form>
 
           </div>

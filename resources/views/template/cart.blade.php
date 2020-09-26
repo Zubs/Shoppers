@@ -25,10 +25,10 @@
                     @foreach(Cart::content() as $product) 
                       <tr>
                         <td class="product-thumbnail">
-                          <img src="{{ asset('template/images/shoe_1.jpg') }}" alt="Image" class="img-fluid">
+                          <a href="{{ route('products.show', [$product->model->slug]) }}"><img src="{{ asset('template/images/'.$product->model->slug.'.jpg') }}" alt="Image" class="img-fluid"></a>
                         </td>
                         <td class="product-name">
-                          <h2 class="h5 text-black">{{ $product->name }}</h2>
+                          <h2 class="h5 text-black"><a href="{{ route('products.show', [$product->model->slug]) }}">{{ $product->model->name }}</a></h2>
                         </td>
                         <td>₦{{ $product->price }}</td>
                         <td>
@@ -44,7 +44,15 @@
 
                         </td>
                         <td>₦{{ $product->price * $product->qty }}</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                        {{-- <td><a href="#" class="btn btn-primary btn-sm">X</a></td> --}}
+                        <td>
+                          <form action="{{ route('cart.remove', $product->rowId) }}" method="POST">
+                            @csrf
+                            {{ method_field('DELETE') }}
+
+                            <button class="btn btn-primary btn-sm" type="submit">X</button>
+                          </form>
+                        </td>
                       </tr>
                     @endforeach
                   @else
