@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class CartController extends Controller
+class WishListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $title = 'Cart';
-        return view('template.cart')->with('title', $title);
+        $title = 'Wish List';
+        return view('template.wishlist')->with('title', $title);
     }
 
     /**
@@ -26,9 +26,9 @@ class CartController extends Controller
      */
     public function empty()
     {
-        Cart::destroy();
+        Cart::instance('wishlist')->destroy();
 
-        return redirect()->route('cart.index')->with('success', 'Cart Emptied Successfully');
+        return redirect()->route('wishlist.index')->with('success', 'Wish List Emptied Successfully');
     }
 
     /**
@@ -49,11 +49,9 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        Cart::instance('default')->add($request->id, $request->name, $request->qty, $request->price, 0)->associate('App\Models\Product');
+        Cart::instance('wishlist')->add($request->id, $request->name, 1, $request->price, 0)->associate('App\Models\Product');
 
-        // print_r([$request->id, $request->name, $request->qty, $request->price, 0]);
-
-        return redirect()->route('cart.index')->with('success', 'Product Added To Cart Successfully');
+        return redirect()->route('wishlist.index')->with('success', 'Product Added To Wish List Successfully');
     }
 
     /**
@@ -98,8 +96,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        Cart::instance('default')->remove($id);
+        Cart::instance('wishlist')->remove($id);
 
-        return back()->with('success', 'Product Removed From Cart Successfully');
+        return back()->with('success', 'Product Removed From Wish List Successfully');
     }
 }

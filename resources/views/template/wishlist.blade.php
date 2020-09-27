@@ -15,14 +15,14 @@
                     <th class="product-thumbnail">Image</th>
                     <th class="product-name">Product</th>
                     <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-total">Total</th>
+                    {{-- <th class="product-quantity">Quantity</th> --}}
+                    <th class="product-remove">Move To Cart</th>
                     <th class="product-remove">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if(Cart::instance('default')->count() > 0)
-                    @foreach(Cart::instance('default')->content() as $product) 
+                  @if(Cart::instance('wishlist')->count() > 0)
+                    @foreach(Cart::instance('wishlist')->content() as $product) 
                       <tr>
                         <td class="product-thumbnail">
                           <a href="{{ route('products.show', [$product->model->slug]) }}"><img src="{{ asset('template/images/'.$product->model->slug.'.jpg') }}" alt="Image" class="img-fluid"></a>
@@ -31,33 +31,13 @@
                           <h2 class="h5 text-black"><a href="{{ route('products.show', [$product->model->slug]) }}">{{ $product->model->name }}</a></h2>
                         </td>
                         <td>₦{{ $product->price }}</td>
-                        <td>
-                          <div class="input-group mb-3" style="max-width: 120px;">
-                            <div class="input-group-prepend">
-                              <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                            </div>
-                            <input type="text" class="form-control text-center" value="{{ $product->qty }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                            </div>
-                          </div>
-
-                        </td>
-                        <td>₦{{ $product->price * $product->qty }}</td>
-                        <td><a href="{{ route('cart.remove', $product->rowId) }}" class="btn btn-primary btn-sm">X</a></td>
-                        {{-- <td>
-                          <form action="{{ route('cart.remove', $product->rowId) }}" method="POST">
-                            @csrf
-                            {{ method_field('DELETE') }}
-
-                            <button class="btn btn-primary btn-sm" type="submit">X</button>
-                          </form>
-                        </td>
- --}}                      </tr>
+                        <td>Hello</td>
+                        <td><a href="{{ route('wishlist.remove', $product->rowId) }}" class="btn btn-primary btn-sm">X</a></td>
+                      </tr>
                     @endforeach
                   @else
                     <tr>
-                      <td colspan="6"><h2>No Items In Cart</h2></td>
+                      <td colspan="6"><h2>No Items In Wish List</h2></td>
                     </tr>
                   @endif
                 </tbody>
@@ -73,7 +53,7 @@
                 <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
               </div> --}}
               <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-sm btn-block" onclick="window.location='{{ route('cart.empty') }}'">Empty Cart</button>
+                <button class="btn btn-primary btn-sm btn-block" onclick="window.location='{{ route('wishlist.empty') }}'" {{ Cart::instance('wishlist')->count() ? "" : "disabled" }}>Empty Wish List</button>
               </div>
               <div class="col-md-6">
                 <button class="btn btn-outline-primary btn-sm btn-block" onclick="window.location='{{ route('products.index') }}'">Continue Shopping</button>
@@ -105,15 +85,15 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦{{ Cart::instance('default')->subtotal() }}</strong>
+                    <strong class="text-black">₦{{ Cart::instance('wishlist')->subtotal() }}</strong>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <span class="text-black">Tax (7%)</span>
+                    <span class="text-black">Tax</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦{{ Cart::instance('default')->tax() }}</strong>
+                    <strong class="text-black">₦{{ Cart::instance('wishlist')->tax() }}</strong>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -121,7 +101,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">₦{{ Cart::instance('default')->total() }}</strong>
+                    <strong class="text-black">₦{{ Cart::instance('wishlist')->total() }}</strong>
                   </div>
                 </div>
 

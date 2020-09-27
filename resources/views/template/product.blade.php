@@ -10,7 +10,7 @@
           <div class="col-md-6">
             <h2 class="text-black">{{ $products->name }}</h2>
             <p class="mb-4">{{ $products->description }}</p>
-            <p><strong class="text-primary h4">{{ $products->presentPrice() }}</strong></p>
+            <p><strong class="text-primary h4">₦{{ $products->presentPrice() }}</strong></p>
             <form action="{{ route('cart.add') }}" method="POST">
               @csrf
               <div class="mb-1 d-flex">
@@ -47,9 +47,15 @@
               <input type="hidden" name="id" value="{{ $products->id }}">
               <input type="hidden" name="name" value="{{ $products->name }}">
               <input type="hidden" name="price" value="{{ $products->presentPrice() }}">
-              <p><button class="buy-now btn btn-sm btn-primary" type="submit">Add To Cart</button> <button class="btn btn-outline-primary btn-sm"><i class="icon icon-heart-o"></i></button></p>
+              <p><button class="buy-now btn btn-sm btn-primary" type="submit">Add To Cart</button></p>
             </form>
-
+            <form action="{{ route('wishlist.index') }}" method="POST">
+              @csrf
+              <input type="hidden" name="id" value="{{ $products->id }}">
+              <input type="hidden" name="name" value="{{ $products->name }}">
+              <input type="hidden" name="price" value="{{ $products->presentPrice() }}">
+              <button class="btn btn-outline-primary btn-sm" type="submit"><i class="icon icon-heart-o"></i></button>
+            </form>
           </div>
         </div>
       </div>
@@ -74,7 +80,7 @@
                     <div class="block-4-text p-4">
                       <h3><a href="{{ route('products.show', [$other->slug]) }}">{{ $other->name }}</a></h3>
                       <p class="mb-0">{{ $other->details }}</p>
-                      <p class="text-primary font-weight-bold">{{ $other->presentPrice() }}</p>
+                      <p class="text-primary font-weight-bold">₦{{ $other->presentPrice() }}</p>
                     </div>
                   </div>
                 </div>

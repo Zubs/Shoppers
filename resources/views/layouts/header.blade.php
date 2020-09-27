@@ -48,7 +48,7 @@
                   <li>
                     <a href="#" class="site-cart">
                       <span class="icon icon-heart-o"></span>
-                      {{-- <span class="count">{{ Cart::instance('default')->count() }}</span> --}}
+                      <span class="count">{{ Cart::instance('wishlist')->count() }}</span>
                     </a>
                   </li>
                   <li>

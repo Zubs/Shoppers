@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+Use App\Http\Controllers\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,16 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 */
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
-Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
+Route::get('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
 Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
+
+/*
+	Wish List routes
+*/
+Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
+Route::post('/wishlist', [WishListController::class, 'store'])->name('wishlist.add');
+Route::get('/wishlist/{product}', [WishListController::class, 'destroy'])->name('wishlist.remove');
+Route::get('/wishlist/empty', [WishListController::class, 'empty'])->name('wishlist.empty');
 
 /*
     Checkout route
