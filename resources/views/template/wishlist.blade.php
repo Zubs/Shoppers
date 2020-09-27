@@ -31,7 +31,7 @@
                           <h2 class="h5 text-black"><a href="{{ route('products.show', [$product->model->slug]) }}">{{ $product->model->name }}</a></h2>
                         </td>
                         <td>₦{{ $product->price }}</td>
-                        <td>Hello</td>
+                        <td><a href="{{ route('wishlist.move', $product->rowId) }}" class="btn btn-primary btn-sm">Move</a></td>
                         <td><a href="{{ route('wishlist.remove', $product->rowId) }}" class="btn btn-primary btn-sm">X</a></td>
                       </tr>
                     @endforeach

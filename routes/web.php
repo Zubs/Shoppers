@@ -42,6 +42,7 @@ Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
 Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist', [WishListController::class, 'store'])->name('wishlist.add');
 Route::get('/wishlist/remove/{product}', [WishListController::class, 'destroy'])->name('wishlist.remove');
+Route::get('/wishlist/move/{product}', [WishListController::class, 'moveToCart'])->name('wishlist.move');
 Route::get('/wishlist/empty', [WishListController::class, 'empty'])->name('wishlist.empty');
 
 /*

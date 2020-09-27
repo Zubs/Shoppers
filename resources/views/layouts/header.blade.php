@@ -46,9 +46,11 @@
                 <ul>
                   <li><a href="#"><span class="icon icon-person"></span></a></li>
                   <li>
-                    <a href="#" class="site-cart">
+                    <a href="{{ route('wishlist.index') }}" class="site-cart">
                       <span class="icon icon-heart-o"></span>
-                      <span class="count">{{ Cart::instance('wishlist')->count() }}</span>
+                      @if(Cart::instance('wishlist')->count())
+                        <span class="count">{{ Cart::instance('wishlist')->count() }}</span>
+                      @endif
                     </a>
                   </li>
                   <li>

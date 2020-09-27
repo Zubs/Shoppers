@@ -73,7 +73,7 @@
                 <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
               </div> --}}
               <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-sm btn-block" onclick="window.location='{{ route('cart.empty') }}'">Empty Cart</button>
+                <button class="btn btn-primary btn-sm btn-block" onclick="window.location='{{ route('cart.empty') }}'" {{ Cart::instance('default')->count() ? "" : "disabled" }}>Empty Cart</button>
               </div>
               <div class="col-md-6">
                 <button class="btn btn-outline-primary btn-sm btn-block" onclick="window.location='{{ route('products.index') }}'">Continue Shopping</button>
