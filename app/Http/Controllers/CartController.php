@@ -32,6 +32,21 @@ class CartController extends Controller
     }
 
     /**
+     * Moves the specified resource from the current cart instance.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function saveForLater($id)
+    {
+        $item = Cart::instance('default')->get($id);
+        Cart::instance('default')->remove($id);
+        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, 0)->associate('App\Models\Product');
+
+        return redirect()->route('wishlist.index')->with('success', 'Product Moved From Cart To Wish List Successfully');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -17,6 +17,7 @@
                     <th class="product-price">Price</th>
                     <th class="product-quantity">Quantity</th>
                     <th class="product-total">Total</th>
+                    <th class="product-remove"><i class="icon icon-heart-o text-primary"></i></th>
                     <th class="product-remove">Remove</th>
                   </tr>
                 </thead>
@@ -44,6 +45,7 @@
 
                         </td>
                         <td>₦{{ $product->price * $product->qty }}</td>
+                        <td><a href="{{ route('cart.move', $product->rowId) }}" class="btn btn-primary btn-sm">Move</a></td>
                         <td><a href="{{ route('cart.remove', $product->rowId) }}" class="btn btn-primary btn-sm">X</a></td>
                         {{-- <td>
                           <form action="{{ route('cart.remove', $product->rowId) }}" method="POST">

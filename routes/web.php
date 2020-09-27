@@ -34,6 +34,7 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
 Route::get('/cart/remove/{product}', [CartController::class, 'destroy'])->name('cart.remove');
+Route::get('/cart/move/{product}', [CartController::class, 'saveForLater'])->name('cart.move');
 Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
 
 /*
