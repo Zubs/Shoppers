@@ -33,7 +33,7 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 */
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
-Route::get('/cart/{product}', [CartController::class, 'destroy'])->name('cart.remove');
+Route::get('/cart/remove/{product}', [CartController::class, 'destroy'])->name('cart.remove');
 Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
 
 /*
@@ -41,7 +41,7 @@ Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
 */
 Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
 Route::post('/wishlist', [WishListController::class, 'store'])->name('wishlist.add');
-Route::get('/wishlist/{product}', [WishListController::class, 'destroy'])->name('wishlist.remove');
+Route::get('/wishlist/remove/{product}', [WishListController::class, 'destroy'])->name('wishlist.remove');
 Route::get('/wishlist/empty', [WishListController::class, 'empty'])->name('wishlist.empty');
 
 /*
