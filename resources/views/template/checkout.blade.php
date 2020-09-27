@@ -206,21 +206,25 @@
                       <th>Total</th>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Polo Shirt <strong class="mx-2">x</strong>   1</td>
-                        <td>₦1500.00</td>
-                      </tr>
+                      @if(Cart::count())
+                        @foreach(Cart::content() as $product)
+                          <tr>
+                            <td>{{ $product->name }} <strong class="mx-2">x</strong>   {{ $product->qty }}</td>
+                            <td>₦{{ $product->price }}</td>
+                          </tr>
+                        @endforeach
+                      @endif
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                        <td class="text-black">₦1500.00</td>
+                        <td class="text-black">₦{{ Cart::subtotal() }}</td>
                       </tr>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Tax (7%)</strong></td>
-                        <td class="text-black">₦105.00</td>
+                        <td class="text-black">₦{{ Cart::tax() }}</td>
                       </tr>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                        <td class="text-black font-weight-bold"><strong>₦1605.00</strong></td>
+                        <td class="text-black font-weight-bold"><strong>₦{{ Cart::total() }}</strong></td>
                       </tr>
                     </tbody>
                   </table>

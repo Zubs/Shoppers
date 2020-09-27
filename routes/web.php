@@ -31,20 +31,30 @@ Route::get('/thanks', [PagesController::class, 'thanks'])->name('thanks');
 /*
     Cart routes
 */
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
-Route::get('/cart/remove/{product}', [CartController::class, 'destroy'])->name('cart.remove');
-Route::get('/cart/move/{product}', [CartController::class, 'saveForLater'])->name('cart.move');
-Route::get('/cart/empty', [CartController::class, 'empty'])->name('cart.empty');
+Route::group([
+	'prefix' => '/cart',
+	'as' => 'cart.',
+], function () {
+	Route::get('/', [CartController::class, 'index'])->name('index');
+	Route::post('/', [CartController::class, 'store'])->name('add');
+	Route::get('/remove/{product}', [CartController::class, 'destroy'])->name('remove');
+	Route::get('/move/{product}', [CartController::class, 'saveForLater'])->name('move');
+	Route::get('/empty', [CartController::class, 'empty'])->name('empty');
+});
 
 /*
 	Wish List routes
 */
-Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
-Route::post('/wishlist', [WishListController::class, 'store'])->name('wishlist.add');
-Route::get('/wishlist/remove/{product}', [WishListController::class, 'destroy'])->name('wishlist.remove');
-Route::get('/wishlist/move/{product}', [WishListController::class, 'moveToCart'])->name('wishlist.move');
-Route::get('/wishlist/empty', [WishListController::class, 'empty'])->name('wishlist.empty');
+Route::group([
+	'prefix' => '/wishlist',
+	'as' => 'wishlist.',
+], function () {
+	Route::get('/', [WishListController::class, 'index'])->name('index');
+	Route::post('/', [WishListController::class, 'store'])->name('add');
+	Route::get('/remove/{product}', [WishListController::class, 'destroy'])->name('remove');
+	Route::get('/move/{product}', [WishListController::class, 'moveToCart'])->name('move');
+	Route::get('/empty', [WishListController::class, 'empty'])->name('empty');
+});
 
 /*
     Checkout route
