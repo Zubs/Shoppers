@@ -107,7 +107,7 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='/checkout'">Proceed To Checkout</button>
+                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='{{ route('wishlist.allToCart') }}'">Move All To Cart</button>
                   </div>
                 </div>
               </div>

@@ -54,6 +54,7 @@ Route::group([
 	Route::get('/remove/{product}', [WishListController::class, 'destroy'])->name('remove');
 	Route::get('/move/{product}', [WishListController::class, 'moveToCart'])->name('move');
 	Route::get('/empty', [WishListController::class, 'empty'])->name('empty');
+	Route::get('/all/move', [WishListController::class, 'allToCart'])->name('allToCart');
 });
 
 /*
