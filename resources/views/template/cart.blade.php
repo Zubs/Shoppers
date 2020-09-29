@@ -37,9 +37,9 @@
                             <div class="input-group-prepend">
                               <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                             </div>
-                            <input type="text" class="form-control text-center" value="{{ $product->qty }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <input type="text" class="form-control text-center quantity" value="{{ $product->qty }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" id="v{{ $product->model->id }}">
                             <div class="input-group-append">
-                              <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                              <button class="btn btn-outline-primary js-btn-plus" type="button" onclick="console.log(parseInt(document.querySelector('#v{{ $product->model->id }}').value) + 1);">&plus;</button>
                             </div>
                           </div>
 
@@ -138,4 +138,18 @@
         </div>
       </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+      (() => {
+        const classnames = document.querySelectorAll('.quantity')
+
+        Array.from(classnames).forEach((element) => {
+          console.log(element.value);
+          element.addEventListener('change', () => {
+            console.log('changed');
+            console.log(element.value);
+          })
+        })
+      })();
+    </script>
 @endsection
