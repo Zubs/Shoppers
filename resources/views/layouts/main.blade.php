@@ -1,5 +1,5 @@
-@include('nav')
+@include('layouts.nav')
 
-@section('content')
+@yield('content')
 
-@include('footer')
+@include('layouts.footer')
