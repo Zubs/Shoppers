@@ -45,7 +45,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('single-product');
     }
 
     /**
