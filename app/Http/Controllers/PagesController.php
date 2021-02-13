@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Import Models
+use App\Models\Products;
+
 class PagesController extends Controller
 {
     /**
@@ -13,7 +16,8 @@ class PagesController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $products = Products::inRandomOrder()->take(8)->get();
+        return view('index')->with('products', $products);
     }
 
     /**
