@@ -31,7 +31,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-5 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Add to cart</a></div>
+                      <div class="col-sm-5 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{{ route('cart.index') }}">Add to cart</a></div>
                     </div><a class="btn btn-link text-dark p-0" href="#"><i class="far fa-heart mr-2"></i>Add to wish list</a>
                   </div>
                 </div>
@@ -128,8 +128,8 @@
               <!-- CART NAV-->
               <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
-                  <div class="col-md-6 mb-3 mb-md-0 text-md-left"><a class="btn btn-link p-0 text-dark btn-sm" href="shop.html"><i class="fas fa-long-arrow-alt-left mr-2"> </i>Continue shopping</a></div>
-                  <div class="col-md-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="checkout.html">Procceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
+                  <div class="col-md-6 mb-3 mb-md-0 text-md-left"><a class="btn btn-link p-0 text-dark btn-sm" href="{{ route('products.index') }}"><i class="fas fa-long-arrow-alt-left mr-2"> </i>Continue shopping</a></div>
+                  <div class="col-md-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="{{ route('checkout') }}">Procceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
                 </div>
               </div>
             </div>

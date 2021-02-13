@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products')->with('title', "Shop");
+        return view('checkout')->with('title', "Checkout");
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        return view('single-product')->with('title', "Product Name");
+        //
     }
 
     /**

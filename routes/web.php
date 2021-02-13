@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,6 @@ Route::group([
 ], function () {
 	Route::get('/', [CartController::class, 'index'])->name('index');
 });
+
+// Checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');

@@ -13,7 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        return view('cart')->with('title', "Cart");
     }
 
     /**

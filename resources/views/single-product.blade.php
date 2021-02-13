@@ -7,7 +7,10 @@
           <div class="modal-content">
             <div class="modal-body p-0">
               <div class="row align-items-stretch">
-                <div class="col-lg-6 p-lg-0"><a class="product-view d-block h-100 bg-cover bg-center" style="background: url(img/product-5.jpg)" href="img/product-5.jpg" data-lightbox="productview" title="Red digital smartwatch"></a><a class="d-none" href="img/product-5-alt-1.jpg" title="Red digital smartwatch" data-lightbox="productview"></a><a class="d-none" href="img/product-5-alt-2.jpg" title="Red digital smartwatch" data-lightbox="productview"></a></div>
+                <div class="col-lg-6 p-lg-0">
+                  <a class="product-view d-block h-100 bg-cover bg-center" style="background: url({{ asset('img/product-5.jpg') }})" href="{{ asset('img/product-5.jpg') }}" data-lightbox="productview" title="Red digital smartwatch"></a>
+                  <a class="d-none" href="img/product-5-alt-1.jpg" title="Red digital smartwatch" data-lightbox="productview"></a><a class="d-none" href="img/product-5-alt-2.jpg" title="Red digital smartwatch" data-lightbox="productview"></a>
+                </div>
                 <div class="col-lg-6">
                   <button class="close p-4" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                   <div class="p-5 my-md-4">
@@ -31,7 +34,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-5 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Add to cart</a></div>
+                      <div class="col-sm-5 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{{ route('cart.index') }}">Add to cart</a></div>
                     </div><a class="btn btn-link text-dark p-0" href="#"><i class="far fa-heart mr-2"></i>Add to wish list</a>
                   </div>
                 </div>
@@ -48,14 +51,18 @@
               <div class="row m-sm-0">
                 <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0">
                   <div class="owl-thumbs d-flex flex-row flex-sm-column" data-slider-id="1">
-                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="img/product-detail-1.jpg" alt="..."></div>
-                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="img/product-detail-2.jpg" alt="..."></div>
-                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="img/product-detail-3.jpg" alt="..."></div>
-                    <div class="owl-thumb-item flex-fill mb-2"><img class="w-100" src="img/product-detail-4.jpg" alt="..."></div>
+                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-1.jpg') }}" alt="..."></div>
+                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-2.jpg') }}" alt="..."></div>
+                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-3.jpg') }}" alt="..."></div>
+                    <div class="owl-thumb-item flex-fill mb-2"><img class="w-100" src="{{ asset('img/product-detail-4.jpg') }}" alt="..."></div>
                   </div>
                 </div>
                 <div class="col-sm-10 order-1 order-sm-2">
-                  <div class="owl-carousel product-slider" data-slider-id="1"><a class="d-block" href="img/product-detail-1.jpg" data-lightbox="product" title="Product item 1"><img class="img-fluid" src="img/product-detail-1.jpg" alt="..."></a><a class="d-block" href="img/product-detail-2.jpg" data-lightbox="product" title="Product item 2"><img class="img-fluid" src="img/product-detail-2.jpg" alt="..."></a><a class="d-block" href="img/product-detail-3.jpg" data-lightbox="product" title="Product item 3"><img class="img-fluid" src="img/product-detail-3.jpg" alt="..."></a><a class="d-block" href="img/product-detail-4.jpg" data-lightbox="product" title="Product item 4"><img class="img-fluid" src="img/product-detail-4.jpg" alt="..."></a></div>
+                  <div class="owl-carousel product-slider" data-slider-id="1">
+                    <a class="d-block" href="{{ asset('img/product-detail-1.jpg') }}" data-lightbox="product" title="Product item 1"><img class="img-fluid" src="{{ asset('img/product-detail-1.jpg') }}" alt="..."></a>
+                    <a class="d-block" href="{{ asset('img/product-detail-2.jpg') }}" data-lightbox="product" title="Product item 2"><img class="img-fluid" src="{{ asset('img/product-detail-2.jpg') }}" alt="..."></a>
+                    <a class="d-block" href="{{ asset('img/product-detail-3.jpg') }}" data-lightbox="product" title="Product item 3"><img class="img-fluid" src="{{ asset('img/product-detail-3.jpg') }}" alt="..."></a>
+                    <a class="d-block" href="{{ asset('img/product-detail-4.jpg') }}" data-lightbox="product" title="Product item 4"><img class="img-fluid" src="{{ asset('img/product-detail-4.jpg') }}" alt="..."></a></div>
                 </div>
               </div>
             </div>
@@ -81,7 +88,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Add to cart</a></div>
+                <div class="col-sm-3 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{{ route('cart.index') }}">Add to cart</a></div>
               </div><a class="btn btn-link text-dark p-0 mb-4" href="#"><i class="far fa-heart mr-2"></i>Add to wish list</a><br>
               <ul class="list-unstyled small d-inline-block">
                 <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">SKU:</strong><span class="ml-2 text-muted">039</span></li>
@@ -106,7 +113,7 @@
               <div class="p-4 p-lg-5 bg-white">
                 <div class="row">
                   <div class="col-lg-8">
-                    <div class="media mb-3"><img class="rounded-circle" src="img/customer-1.png" alt="" width="50">
+                    <div class="media mb-3"><img class="rounded-circle" src="{{ asset('img/customer-1.png') }}" alt="" width="50">
                       <div class="media-body ml-3">
                         <h6 class="mb-0 text-uppercase">Jason Doe</h6>
                         <p class="small text-muted mb-0 text-uppercase">20 May 2020</p>
@@ -120,7 +127,7 @@
                         <p class="text-small mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                       </div>
                     </div>
-                    <div class="media"><img class="rounded-circle" src="img/customer-2.png" alt="" width="50">
+                    <div class="media"><img class="rounded-circle" src="{{ asset('img/customer-2.png') }}" alt="" width="50">
                       <div class="media-body ml-3">
                         <h6 class="mb-0 text-uppercase">Jason Doe</h6>
                         <p class="small text-muted mb-0 text-uppercase">20 May 2020</p>
@@ -145,7 +152,7 @@
             <!-- PRODUCT-->
             <div class="col-lg-3 col-sm-6">
               <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="img/product-1.jpg" alt="..."></a>
+                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-1.jpg') }}" alt="..."></a>
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
@@ -154,14 +161,14 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">Kui Ye Chen’s AirPods</a></h6>
+                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Kui Ye Chen’s AirPods</a></h6>
                 <p class="small text-muted">$250</p>
               </div>
             </div>
             <!-- PRODUCT-->
             <div class="col-lg-3 col-sm-6">
               <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="img/product-2.jpg" alt="..."></a>
+                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-2.jpg') }}" alt="..."></a>
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
@@ -170,14 +177,14 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">Air Jordan 12 gym red</a></h6>
+                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Air Jordan 12 gym red</a></h6>
                 <p class="small text-muted">$300</p>
               </div>
             </div>
             <!-- PRODUCT-->
             <div class="col-lg-3 col-sm-6">
               <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="img/product-3.jpg" alt="..."></a>
+                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-3.jpg') }}" alt="..."></a>
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
@@ -186,14 +193,14 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">Cyan cotton t-shirt</a></h6>
+                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Cyan cotton t-shirt</a></h6>
                 <p class="small text-muted">$25</p>
               </div>
             </div>
             <!-- PRODUCT-->
             <div class="col-lg-3 col-sm-6">
               <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="img/product-4.jpg" alt="..."></a>
+                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-4.jpg') }}" alt="..."></a>
                   <div class="product-overlay">
                     <ul class="mb-0 list-inline">
                       <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
@@ -202,7 +209,7 @@
                     </ul>
                   </div>
                 </div>
-                <h6> <a class="reset-anchor" href="detail.html">Timex Unisex Originals</a></h6>
+                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Timex Unisex Originals</a></h6>
                 <p class="small text-muted">$351</p>
               </div>
             </div>
