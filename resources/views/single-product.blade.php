@@ -51,7 +51,7 @@
               <div class="row m-sm-0">
                 <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0">
                   <div class="owl-thumbs d-flex flex-row flex-sm-column" data-slider-id="1">
-                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-1.jpg') }}" alt="..."></div>
+                    <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/' . $product->cover_image ) }}" alt="..."></div>
                     <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-2.jpg') }}" alt="..."></div>
                     <div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0"><img class="w-100" src="{{ asset('img/product-detail-3.jpg') }}" alt="..."></div>
                     <div class="owl-thumb-item flex-fill mb-2"><img class="w-100" src="{{ asset('img/product-detail-4.jpg') }}" alt="..."></div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-sm-10 order-1 order-sm-2">
                   <div class="owl-carousel product-slider" data-slider-id="1">
-                    <a class="d-block" href="{{ asset('img/product-detail-1.jpg') }}" data-lightbox="product" title="Product item 1"><img class="img-fluid" src="{{ asset('img/product-detail-1.jpg') }}" alt="..."></a>
+                    <a class="d-block" href="{{ asset('img/' . $product->cover_image ) }}" data-lightbox="product" title="Product item 1"><img class="img-fluid" src="{{ asset('img/' . $product->cover_image ) }}" alt="..."></a>
                     <a class="d-block" href="{{ asset('img/product-detail-2.jpg') }}" data-lightbox="product" title="Product item 2"><img class="img-fluid" src="{{ asset('img/product-detail-2.jpg') }}" alt="..."></a>
                     <a class="d-block" href="{{ asset('img/product-detail-3.jpg') }}" data-lightbox="product" title="Product item 3"><img class="img-fluid" src="{{ asset('img/product-detail-3.jpg') }}" alt="..."></a>
                     <a class="d-block" href="{{ asset('img/product-detail-4.jpg') }}" data-lightbox="product" title="Product item 4"><img class="img-fluid" src="{{ asset('img/product-detail-4.jpg') }}" alt="..."></a></div>
@@ -75,9 +75,9 @@
                 <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
                 <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
               </ul>
-              <h1>Red digital smartwatch</h1>
-              <p class="text-muted lead">$250</p>
-              <p class="text-small mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus. Vestibulum ultricies aliquam convallis.</p>
+              <h1>{{ $product->name }}</h1>
+              <p class="text-muted lead">₦{{ $product->price }}</p>
+              <p class="text-small mb-4">{{ $product->details }}</p>
               <div class="row align-items-stretch mb-4">
                 <div class="col-sm-5 pr-sm-0">
                   <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white"><span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
@@ -106,7 +106,7 @@
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
               <div class="p-4 p-lg-5 bg-white">
                 <h6 class="text-uppercase">Product description </h6>
-                <p class="text-muted text-small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="text-muted text-small mb-0">{{ $product->description }}</p>
               </div>
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
@@ -150,69 +150,23 @@
           <h2 class="h5 text-uppercase mb-4">Related products</h2>
           <div class="row">
             <!-- PRODUCT-->
-            <div class="col-lg-3 col-sm-6">
-              <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-1.jpg') }}" alt="..."></a>
-                  <div class="product-overlay">
-                    <ul class="mb-0 list-inline">
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="#">Add to cart</a></li>
-                      <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul>
+            @foreach($likes as $like)
+              <div class="col-lg-3 col-sm-6">
+                <div class="product text-center skel-loader">
+                  <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [$like->slug]) }}"><img class="img-fluid w-100" src="{{ asset('img/' . $like->cover_image ) }}" alt="..."></a>
+                    <div class="product-overlay">
+                      <ul class="mb-0 list-inline">
+                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
+                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ route('cart.index') }}">Add to cart</a></li>
+                        <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                      </ul>
+                    </div>
                   </div>
+                  <h6> <a class="reset-anchor" href="{{ route('products.show', [$like->slug]) }}">{{ $like->name }}</a></h6>
+                  <p class="small text-muted">₦{{ $like->price }}</p>
                 </div>
-                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Kui Ye Chen’s AirPods</a></h6>
-                <p class="small text-muted">$250</p>
               </div>
-            </div>
-            <!-- PRODUCT-->
-            <div class="col-lg-3 col-sm-6">
-              <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-2.jpg') }}" alt="..."></a>
-                  <div class="product-overlay">
-                    <ul class="mb-0 list-inline">
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="#">Add to cart</a></li>
-                      <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Air Jordan 12 gym red</a></h6>
-                <p class="small text-muted">$300</p>
-              </div>
-            </div>
-            <!-- PRODUCT-->
-            <div class="col-lg-3 col-sm-6">
-              <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-3.jpg') }}" alt="..."></a>
-                  <div class="product-overlay">
-                    <ul class="mb-0 list-inline">
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="#">Add to cart</a></li>
-                      <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Cyan cotton t-shirt</a></h6>
-                <p class="small text-muted">$25</p>
-              </div>
-            </div>
-            <!-- PRODUCT-->
-            <div class="col-lg-3 col-sm-6">
-              <div class="product text-center skel-loader">
-                <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ route('products.show', [2]) }}"><img class="img-fluid w-100" src="{{ asset('img/product-4.jpg') }}" alt="..."></a>
-                  <div class="product-overlay">
-                    <ul class="mb-0 list-inline">
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
-                      <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="#">Add to cart</a></li>
-                      <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <h6> <a class="reset-anchor" href="{{ route('products.show', [2]) }}">Timex Unisex Originals</a></h6>
-                <p class="small text-muted">$351</p>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </section>

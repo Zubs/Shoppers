@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Import Models
+use App\Models\Products;
+
 class ProductsController extends Controller
 {
     /**
@@ -13,7 +16,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products')->with('title', "Shop");
+        $products = Products::orderBy('created_at', 'desc')->paginate(12);
+        return view('products')->with([
+            'title' => "Shop",
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -40,12 +47,19 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        return view('single-product')->with('title', "Product Name");
+        $product = Products::where('slug', $slug)->first();
+        $likes = Products::inRandomOrder()->take(4)->get();
+
+        return view('single-product')->with([
+            'title' => $product->name,
+            'product' => $product,
+            'likes' => $likes,
+        ]);
     }
 
     /**

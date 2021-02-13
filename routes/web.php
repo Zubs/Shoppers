@@ -27,7 +27,7 @@ Route::group([
 	'as' => 'products.'
 ], function () {
 	Route::get('/', [ProductsController::class, 'index'])->name('index');
-	Route::get('/{id}', [ProductsController::class, 'show'])->name('show');
+	Route::get('/{slug}', [ProductsController::class, 'show'])->name('show');
 });
 
 // All cart routes

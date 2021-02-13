@@ -93,7 +93,7 @@
               <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="product text-center">
                   <div class="position-relative mb-3">
-                    <div class="badge text-white badge-info">New</div><a class="d-block" href="{{ route('products.show', [$product->id]) }}"><img class="img-fluid w-100" src="img/{{ $product->cover_image }}" alt="..."></a>
+                    <div class="badge text-white badge-info">New</div><a class="d-block" href="{{ route('products.show', [$product->slug]) }}"><img class="img-fluid w-100" src="img/{{ $product->cover_image }}" alt="..."></a>
                     <div class="product-overlay">
                       <ul class="mb-0 list-inline">
                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
@@ -102,7 +102,7 @@
                       </ul>
                     </div>
                   </div>
-                  <h6> <a class="reset-anchor" href="{{ route('products.show', [$product->id]) }}">{{ $product->name }}</a></h6>
+                  <h6> <a class="reset-anchor" href="{{ route('products.show', [$product->slug]) }}">{{ $product->name }}</a></h6>
                   <p class="small text-muted">₦{{ $product->price }}</p>
                 </div>
               </div>
