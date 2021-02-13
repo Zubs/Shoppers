@@ -9,7 +9,7 @@
 * Laravel
 
 ### Extra Packages
-None Yet
+* [darryldecode/cart](https://github.com/darryldecode/laravelshoppingcart) to manage cart activities.
 
 ## Author
 * [Zubair Idris Aweda]('https://zubs.github.io')

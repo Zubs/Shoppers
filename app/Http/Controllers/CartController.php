@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Import Models
+use App\Models\Products;
+
 class CartController extends Controller
 {
     /**
@@ -34,7 +37,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = $request->id;
+        $quantity = $request->quantity;
+        $product = Products::where('id', $id)->first();
+
+        \Cart::add($product->id, $product->name, $product->price, $quantity)->associate('App\Models\Products');
+
+        return redirect()->route('cart.index')->with('success', 'Product Added To Cart Successfully');
     }
 
     /**

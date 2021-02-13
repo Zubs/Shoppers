@@ -97,9 +97,14 @@
                     <div class="product-overlay">
                       <ul class="mb-0 list-inline">
                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
-                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ route('cart.index') }}">Add to cart</a></li>
+                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="#" onclick="event.preventDefault(); document.getElementById('form-{{ $product->id }}').submit();">Add to cart</a></li>
                         <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-toggle="modal"><i class="fas fa-expand"></i></a></li>
                       </ul>
+                      <form action="{{ route('cart.store') }}" method="POST" id="form-{{ $product->id }}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="hidden" name="quantity" value="1">
+                      </form>
                     </div>
                   </div>
                   <h6> <a class="reset-anchor" href="{{ route('products.show', [$product->slug]) }}">{{ $product->name }}</a></h6>

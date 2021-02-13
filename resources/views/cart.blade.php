@@ -76,52 +76,31 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th class="pl-0 border-0" scope="row">
-                        <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="{{ route('products.show', [1]) }}"><img src="img/product-detail-3.jpg" alt="..." width="70"/></a>
-                          <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{ route('products.show', [1]) }}">Red digital smartwatch</a></strong></div>
-                        </div>
-                      </th>
-                      <td class="align-middle border-0">
-                        <p class="mb-0 small">₦250</p>
-                      </td>
-                      <td class="align-middle border-0">
-                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                          <div class="quantity">
-                            <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1"/>
-                            <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                    @foreach(Cart::getContent() as $product)
+                      <tr>
+                        <th class="pl-0 border-0" scope="row">
+                          <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="{{ route('products.show', [$product->model->slug]) }}"><img src="img/{{ $product->model->cover_image }}" alt="..." width="70"/></a>
+                            <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{ route('products.show', [$product->model->slug]) }}">{{ $product->name }}</a></strong></div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle border-0">
-                        <p class="mb-0 small">₦250</p>
-                      </td>
-                      <td class="align-middle border-0"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
-                    </tr>
-                    <tr>
-                      <th class="pl-0 border-light" scope="row">
-                        <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="{{ route('products.show', [1]) }}"><img src="img/product-detail-2.jpg" alt="..." width="70"/></a>
-                          <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{ route('products.show', [1]) }}">Apple watch</a></strong></div>
-                        </div>
-                      </th>
-                      <td class="align-middle border-light">
-                        <p class="mb-0 small">₦250</p>
-                      </td>
-                      <td class="align-middle border-light">
-                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                          <div class="quantity">
-                            <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1"/>
-                            <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                        </th>
+                        <td class="align-middle border-0">
+                          <p class="mb-0 small">₦{{ $product->price }}</p>
+                        </td>
+                        <td class="align-middle border-0">
+                          <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                            <div class="quantity">
+                              <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
+                              <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="{{ $product->quantity }}"/>
+                              <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle border-light">
-                        <p class="mb-0 small">₦250</p>
-                      </td>
-                      <td class="align-middle border-light"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
-                    </tr>
+                        </td>
+                        <td class="align-middle border-0">
+                          <p class="mb-0 small">₦{{ $product->quantity * $product->price }}</p>
+                        </td>
+                        <td class="align-middle border-0"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

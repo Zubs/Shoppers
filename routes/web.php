@@ -36,6 +36,7 @@ Route::group([
 	'as' => 'cart.'
 ], function () {
 	Route::get('/', [CartController::class, 'index'])->name('index');
+	Route::post('/', [CartController::class, 'store'])->name('store');
 });
 
 // Checkout

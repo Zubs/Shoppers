@@ -53,7 +53,7 @@ class ProductsController extends Controller
     public function show($slug)
     {
         $product = Products::where('slug', $slug)->first();
-        $likes = Products::inRandomOrder()->take(4)->get();
+        $likes = Products::where('slug', '!=', $slug)->inRandomOrder()->take(4)->get();
 
         return view('single-product')->with([
             'title' => $product->name,
