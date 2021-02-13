@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishListController;
 use App\Http\Controllers\CheckoutController;
 
 /*
@@ -37,6 +38,15 @@ Route::group([
 ], function () {
 	Route::get('/', [CartController::class, 'index'])->name('index');
 	Route::post('/', [CartController::class, 'store'])->name('store');
+});
+
+// All Wishlist Routes
+Route::group([
+	'prefix' => '/wishlist',
+	'as' => 'wishlist.'
+], function () {
+	Route::get('/', [WishListController::class, 'index'])->name('index');
+	Route::post('/', [WishListController::class, 'store'])->name('store');
 });
 
 // Checkout

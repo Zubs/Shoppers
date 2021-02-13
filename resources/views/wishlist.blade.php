@@ -46,24 +46,21 @@
           <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
               <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0">Cart</h1>
+                <h1 class="h2 text-uppercase mb-0">WishList</h1>
               </div>
               <div class="col-lg-6 text-lg-right">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <li class="breadcrumb-item active" aria-current="page">WishList</li>
                   </ol>
                 </nav>
               </div>
             </div>
           </div>
         </section>
-        @if(session()->has('success'))
-          <div class="alert alert-success">{{ session()->get('success') }}</div>
-        @endif
         <section class="py-5">
-          <h2 class="h5 text-uppercase mb-4">Shopping cart</h2>
+          <h2 class="h5 text-uppercase mb-4">WishList</h2>
           <div class="row">
             <div class="col-lg-8 mb-4 mb-lg-0">
               <!-- CART TABLE-->
@@ -73,8 +70,6 @@
                     <tr>
                       <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Product</strong></th>
                       <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Price</strong></th>
-                      <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Quantity</strong></th>
-                      <th class="border-0" scope="col"> <strong class="text-small text-uppercase">Total</strong></th>
                       <th class="border-0" scope="col"> </th>
                     </tr>
                   </thead>
@@ -88,18 +83,6 @@
                         </th>
                         <td class="align-middle border-0">
                           <p class="mb-0 small">₦{{ $product->price }}</p>
-                        </td>
-                        <td class="align-middle border-0">
-                          <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                            <div class="quantity">
-                              <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                              <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="{{ $product->quantity }}"/>
-                              <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="align-middle border-0">
-                          <p class="mb-0 small">₦{{ $product->quantity * $product->price }}</p>
                         </td>
                         <td class="align-middle border-0"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                       </tr>
