@@ -38,6 +38,9 @@ Route::group([
 ], function () {
 	Route::get('/', [CartController::class, 'index'])->name('index');
 	Route::post('/', [CartController::class, 'store'])->name('store');
+	Route::get('/empty', function () {
+		\Cart::clear();
+	});
 });
 
 // All Wishlist Routes

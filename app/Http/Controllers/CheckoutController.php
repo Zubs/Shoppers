@@ -13,6 +13,10 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        if (\Cart::getContent()->count() == 0) {
+            return redirect()->route('products.index');
+        };
+        
         return view('checkout')->with('title', "Checkout");
     }
 
