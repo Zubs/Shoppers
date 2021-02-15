@@ -172,11 +172,11 @@
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Your order</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Red digital smartwatch</strong><span class="text-muted small">$250</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Gray Nike running shoes</strong><span class="text-muted small">$351</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$601</span></li>
+                    @foreach(Cart::getContent() as $product)
+                      <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">{{ $product->name }}</strong><span class="text-muted small">₦{{ $product->price }}</span></li>
+                      <li class="border-bottom my-2"></li>
+                    @endforeach
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getSubTotal() }}</span></li>
                   </ul>
                 </div>
               </div>
