@@ -101,7 +101,11 @@
                         <td class="align-middle border-0">
                           <p class="mb-0 small">₦{{ $product->quantity * $product->price }}</p>
                         </td>
-                        <td class="align-middle border-0"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                        <td class="align-middle border-0"><a class="reset-anchor" href="#" onclick="event.preventDefault(); document.getElementById('form-{{ $product->id }}').submit();"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                        <form action="{{ route('cart.delete', $product->id) }}" method="POST" id="form-{{ $product->id }}">
+                          @csrf
+                          {{ method_field('DELETE') }}
+                        </form>
                       </tr>
                     @empty
                       <tr class="text-center">
@@ -125,9 +129,11 @@
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Cart total</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">₦250</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">₦{{ Cart::getSubTotal() }}</span></li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦250</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (7.5%)</strong><span class="text-muted small">₦{{ Cart::getCondition('VAT 7.5%')->getCalculatedValue(Cart::getSubTotal()) }}</span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getTotal() }}</span></li>
                     <li>
                       <form action="#">
                         <div class="form-group mb-0">

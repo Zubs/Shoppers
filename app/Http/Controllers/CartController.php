@@ -43,6 +43,27 @@ class CartController extends Controller
 
         \Cart::add($product->id, $product->name, $product->price, $quantity)->associate('App\Models\Products');
 
+        $condition = new \Darryldecode\Cart\CartCondition(array(
+            'name' => 'VAT 7.5%',
+            'type' => 'tax',
+            'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
+            'value' => '7.5%',
+            'attributes' => array( // attributes field is optional
+                'description' => 'Value Added Tax',
+            )
+        ));
+
+        // $condition2 = new \Darryldecode\Cart\CartCondition(array(
+        //     'name' => 'Delivery Fee',
+        //     'type' => 'shipping',
+        //     'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
+        //     'value' => '+' . 1000 * floor(\Cart::getContent()->count() > 10 ? \Cart::getContent()->count() / 10 + 1 : 1),
+        //     'order' => 1
+        // ));
+
+        \Cart::condition($condition);
+        // \Cart::condition($condition2);
+
         return redirect()->route('cart.index')->with('success', 'Product Added To Cart Successfully');
     }
 
@@ -86,8 +107,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        \Cart::remove($id);
+
+        return redirect()->route('cart.index')->with('success', 'Product Removed Successfully');
     }
 }

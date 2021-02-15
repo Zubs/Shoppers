@@ -38,18 +38,10 @@ Route::group([
 ], function () {
 	Route::get('/', [CartController::class, 'index'])->name('index');
 	Route::post('/', [CartController::class, 'store'])->name('store');
+	Route::delete('/{rowId}', [CartController::class, 'delete'])->name('delete');
 	Route::get('/empty', function () {
 		\Cart::clear();
 	});
-});
-
-// All Wishlist Routes
-Route::group([
-	'prefix' => '/wishlist',
-	'as' => 'wishlist.'
-], function () {
-	Route::get('/', [WishListController::class, 'index'])->name('index');
-	Route::post('/', [WishListController::class, 'store'])->name('store');
 });
 
 // Checkout

@@ -55,8 +55,11 @@
                 </li>
               </ul>
               <ul class="navbar-nav ml-auto">               
-                <li class="nav-item"><a class="nav-link {{ url()->current() == route('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">({{ Cart::getContent()->count() }})</small></a></li>
-                <li class="nav-item"><a class="nav-link {{ url()->current() == route('wishlist.index') ? 'active' : '' }}" href="{{ route('wishlist.index') }}"> <i class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
+                <li class="nav-item"><a class="nav-link {{ url()->current() == route('cart.index') ? 'active' : '' }}" href="{{ route('cart.index') }}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">
+                  @if(Cart::getContent()->count() > 0)
+                    ({{ Cart::getContent()->count() }})
+                  @endif
+                </small></a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
               </ul>
             </div>
