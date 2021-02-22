@@ -161,7 +161,73 @@
                     </div>
                   </div>
                   <div class="col-lg-12 form-group">
-                    <button class="btn btn-dark" type="submit">Place order</button>
+                    {{-- <button class="btn btn-dark" type="submit">Place order</button> --}}
+                    <form action="/test" method="POST">
+                      <script src="https://js.paystack.co/v1/inline.js"></script>
+                      <button type="button" onclick="payWithPaystack()" class="btn btn-dark">Place order</button>
+                    </form>
+
+                    <form action="{{ route('checkout.done') }}" id="donedeal" method="POST">
+                      @csrf
+                      <input type="hidden" name="message" value="" id="message">
+                      <input type="hidden" name="reference" value="" id="reference">
+                      <input type="hidden" name="status" value="" id="status">
+                      <input type="hidden" name="trans" value="" id="trans">
+                      <input type="hidden" name="trxref" value="" id="trxref">
+                    </form>
+                     
+                    <script>
+                      function payWithPaystack(){
+                        var handler = PaystackPop.setup({
+                          key: 'pk_test_0e037ea69a1555fcf2f2001b54306b956ef7e07a',
+                          email: 'zubair@humongous.io',
+                          amount: {{ Cart::getTotal() * 100 }},
+                          currency: "NGN",
+                          metadata: {
+                             custom_fields: [
+                                {
+                                    display_name: "Mobile Number",
+                                    variable_name: "mobile_number",
+                                    value: "+2348012345678"
+                                },
+                                {
+                                    display_name: "Products",
+                                    variable_name: "products",
+                                    value: [
+                                        @foreach(Cart::getContent() as $product)
+                                            {
+                                                name: "{{ $product->name }}",
+                                                price: "{{ $product->price }}",
+                                                quantity: "{{ $product->quantity }}"
+                                            },
+                                        @endforeach
+                                    ]
+                                }
+                             ]
+                          },
+                          callback: function(response){
+                              alert('success. transaction ref is ' + response.reference);
+                              console.log(response);
+                              document.getElementById('message').value = response.message;
+                              document.getElementById('reference').value = response.reference;
+                              document.getElementById('status').value = response.status;
+                              document.getElementById('trans').value = response.trans;
+                              document.getElementById('trxref').value = response.trxref;
+                              document.getElementById('donedeal').submit();
+                          }
+                        });
+                        handler.openIframe();
+                      }
+                    </script>
+                    {{-- <form action="/process" method="POST" >
+                      <script
+                        src="https://js.paystack.co/v1/inline.js" 
+                        data-key="pk_test_221221122121"
+                        data-email="customer@email.com"
+                        data-amount="10000"
+                      >
+                      </script>
+                    </form> --}}
                   </div>
                 </div>
               </form>
@@ -176,7 +242,9 @@
                       <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">{{ $product->name }}</strong><span class="text-muted small">₦{{ $product->price }}</span></li>
                       <li class="border-bottom my-2"></li>
                     @endforeach
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getSubTotal() }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (7.5%)</strong><span>₦{{ Cart::getCondition('VAT 7.5%')->getCalculatedValue(Cart::getSubTotal()) }}</span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getTotal() }}</span></li>
                   </ul>
                 </div>
               </div>

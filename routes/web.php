@@ -20,6 +20,10 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 
+Route::get('/test', function () {
+	var_dump($_POST);
+});
+
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 // All products routes
@@ -44,5 +48,11 @@ Route::group([
 	});
 });
 
-// Checkout
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+// All Checkout routes
+Route::group([
+	'prefix' => 'checkout',
+	'as' => 'checkout.'
+], function () {
+	Route::get('/', [CheckoutController::class, 'index'])->name('index');
+	Route::post('/order-successful', [CheckoutController::class, 'store'])->name('done');
+});
