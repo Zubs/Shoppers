@@ -62,117 +62,143 @@
         </section>
         <section class="py-5">
           <!-- BILLING ADDRESS-->
+          @if(session()->has('error'))
+            <div class="alert alert-danger">{{ session()->get('error') }}</div>
+          @endif
           <h2 class="h5 text-uppercase mb-4">Billing details</h2>
           <div class="row">
             <div class="col-lg-8">
-              <form action="{{ route('checkout.done') }}" method="POST" id="billing-form">
+              <form action="{{ route('checkout.done') }}" method="POST" id="billing-form" onsubmit="return submitForm();">
                 @csrf
                 <div class="row">
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="firstName">First name</label>
-                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name" required>
+                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name" required name="firstname" value="{{ old('firstname') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="lastName">Last name</label>
-                    <input class="form-control form-control-lg" id="lastName" type="text" placeholder="Enter your last name">
+                    <input class="form-control form-control-lg" id="lastName" type="text" placeholder="Enter your last name" required name="lastname" value="{{ old('lastname') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="email">Email address</label>
-                    <input class="form-control form-control-lg" id="email" type="email" placeholder="e.g. Jason@example.com">
+                    <input class="form-control form-control-lg" id="email" type="email" placeholder="e.g. Jason@example.com" required name="email" value="{{ old('email') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="phone">Phone number</label>
-                    <input class="form-control form-control-lg" id="phone" type="tel" placeholder="e.g. +02 245354745">
+                    <input class="form-control form-control-lg" id="phone" type="tel" placeholder="e.g. +234 1234567890" required name="phone" value="{{ old('phone') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="company">Company name (optional)</label>
-                    <input class="form-control form-control-lg" id="company" type="text" placeholder="Your company name">
+                    <input class="form-control form-control-lg" id="company" type="text" placeholder="Your company name" name="company" value="{{ old('company') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="country">Country</label>
-                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
+                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country" name="country" required value="{{ old('country') }}"></select>
                   </div>
                   <div class="col-lg-12 form-group">
                     <label class="text-small text-uppercase" for="address">Address line 1</label>
-                    <input class="form-control form-control-lg" id="address" type="text" placeholder="House number and street name">
+                    <input class="form-control form-control-lg" id="address" type="text" placeholder="House number and street name" name="address1" required value="{{ old('address1') }}">
                   </div>
                   <div class="col-lg-12 form-group">
                     <label class="text-small text-uppercase" for="address">Address line 2</label>
-                    <input class="form-control form-control-lg" id="addressalt" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
+                    <input class="form-control form-control-lg" id="addressalt" type="text" placeholder="Apartment, Suite, Unit, etc (optional)" name="address2" required value="{{ old('address2') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="city">Town/City</label>
-                    <input class="form-control form-control-lg" id="city" type="text">
+                    <input class="form-control form-control-lg" id="city" type="text" name="town" value="{{ old('town') }}">
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="state">State/County</label>
-                    <input class="form-control form-control-lg" id="state" type="text">
+                    <input class="form-control form-control-lg" id="state" type="text" name="state" value="{{ old('state') }}">
                   </div>
-                  <div class="col-lg-6 form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" id="alternateAddressCheckbox" type="checkbox">
-                      <label class="custom-control-label text-small" for="alternateAddressCheckbox">Alternate billing address</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="row d-none" id="alternateAddress">
-                      <div class="col-12 mt-4">
-                        <h2 class="h4 text-uppercase mb-4">Alternative billing details</h2>
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="firstName2">First name</label>
-                        <input class="form-control form-control-lg" id="firstName2" type="text" placeholder="Enter your first name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="lastName2">Last name</label>
-                        <input class="form-control form-control-lg" id="lastName2" type="text" placeholder="Enter your last name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="email2">Email address</label>
-                        <input class="form-control form-control-lg" id="email2" type="email" placeholder="e.g. Jason@example.com">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="phone2">Phone number</label>
-                        <input class="form-control form-control-lg" id="phone2" type="tel" placeholder="e.g. +02 245354745">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="company2">Company name (optional)</label>
-                        <input class="form-control form-control-lg" id="company2" type="text" placeholder="Your company name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="country2">Country</label>
-                        <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 1</label>
-                        <input class="form-control form-control-lg" id="address2" type="text" placeholder="House number and street name">
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 2</label>
-                        <input class="form-control form-control-lg" id="addressalt2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="city3">Town/City</label>
-                        <input class="form-control form-control-lg" id="city3" type="text">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="state4">State/County</label>
-                        <input class="form-control form-control-lg" id="state4" type="text">
+                  @auth
+                    <div class="col-lg-6 form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" id="alternateAddressCheckbox" type="checkbox">
+                        <label class="custom-control-label text-small" for="alternateAddressCheckbox">Alternate billing address</label>
                       </div>
                     </div>
-                  </div>
+                    <div class="col-lg-12">
+                      <div class="row d-none" id="alternateAddress">
+                        <div class="col-12 mt-4">
+                          <h2 class="h4 text-uppercase mb-4">Alternative billing details</h2>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="firstName2">First name</label>
+                          <input class="form-control form-control-lg" id="firstName2" type="text" placeholder="Enter your first name">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="lastName2">Last name</label>
+                          <input class="form-control form-control-lg" id="lastName2" type="text" placeholder="Enter your last name">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="email2">Email address</label>
+                          <input class="form-control form-control-lg" id="email2" type="email" placeholder="e.g. Jason@example.com">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="phone2">Phone number</label>
+                          <input class="form-control form-control-lg" id="phone2" type="tel" placeholder="e.g. +02 245354745">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="company2">Company name (optional)</label>
+                          <input class="form-control form-control-lg" id="company2" type="text" placeholder="Your company name">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="country2">Country</label>
+                          <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
+                        </div>
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small text-uppercase" for="address2">Address line 1</label>
+                          <input class="form-control form-control-lg" id="address2" type="text" placeholder="House number and street name">
+                        </div>
+                        <div class="col-lg-12 form-group">
+                          <label class="text-small text-uppercase" for="address2">Address line 2</label>
+                          <input class="form-control form-control-lg" id="addressalt2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="city3">Town/City</label>
+                          <input class="form-control form-control-lg" id="city3" type="text">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                          <label class="text-small text-uppercase" for="state4">State/County</label>
+                          <input class="form-control form-control-lg" id="state4" type="text">
+                        </div>
+                      </div>
+                    </div>
+                  @endauth
                   <div class="col-lg-12 form-group">
-                    {{-- <button class="btn btn-dark" type="submit">Place order</button> --}}
+                    <button class="btn btn-dark" type="submit">Place order</button>
+                  </div>
+                </div>
+                <input type="hidden" name="message" value="" id="message">
+                <input type="hidden" name="reference" value="" id="reference">
+                <input type="hidden" name="status" value="" id="status">
+                <input type="hidden" name="trans" value="" id="trans">
+                <input type="hidden" name="trxref" value="" id="trxref">
+                <div class="col-lg-12 form-group">
                     <form action="/test" method="POST">
                       <script src="https://js.paystack.co/v1/inline.js"></script>
-                      <button type="button" onclick="payWithPaystack()" class="btn btn-dark">Place order</button>
+                      <button onclick="payWithPaystack()" class="btn btn-dark" id="submit-billing" hidden>Place order</button>
                     </form>
                      
                     <script>
-                      function payWithPaystack(){
+                      function submitForm() {
+                        // This lets me know if payment has been made. Yunno because the value is set from the payment response
+                        if (document.getElementById('trxref').value) {
+                          return true;
+                        }
+
+                        // This triggers the payment portal
+                        document.getElementById('submit-billing').click();
+
+                        // Makes sure the form only submits when I want
+                        return false;
+                      };
+
+                      function payWithPaystack() { 
                         var handler = PaystackPop.setup({
                           key: 'pk_test_0e037ea69a1555fcf2f2001b54306b956ef7e07a',
-                          email: 'zubair@humongous.io',
+                          email: document.getElementById('email').value,
                           amount: {{ Cart::getTotal() * 100 }},
                           currency: "NGN",
                           metadata: {
@@ -180,7 +206,7 @@
                                 {
                                     display_name: "Mobile Number",
                                     variable_name: "mobile_number",
-                                    value: "+2348012345678"
+                                    value: document.getElementById('phone').value
                                 },
                                 {
                                     display_name: "Products",
@@ -212,12 +238,6 @@
                       }
                     </script>
                   </div>
-                </div>
-                <input type="hidden" name="message" value="" id="message">
-                <input type="hidden" name="reference" value="" id="reference">
-                <input type="hidden" name="status" value="" id="status">
-                <input type="hidden" name="trans" value="" id="trans">
-                <input type="hidden" name="trxref" value="" id="trxref">
               </form>
             </div>
             <!-- ORDER SUMMARY-->
