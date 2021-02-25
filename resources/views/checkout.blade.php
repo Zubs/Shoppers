@@ -253,7 +253,7 @@
                       <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">{{ $product->name }}</strong><span class="text-muted small">₦{{ $product->price }}</span></li>
                       <li class="border-bottom my-2"></li>
                     @endforeach
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (7.5%)</strong><span>₦{{ Cart::getCondition('VAT 7.5%')->getCalculatedValue(Cart::getSubTotal()) }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (6.0%)</strong><span>₦{{ Cart::getCondition('VAT 6.0%')->getCalculatedValue(Cart::getSubTotal()) }}</span></li>
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getTotal() }}</span></li>
                   </ul>

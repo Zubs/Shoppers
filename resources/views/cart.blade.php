@@ -131,7 +131,7 @@
                   <ul class="list-unstyled mb-0">
                     <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">₦{{ Cart::getSubTotal() }}</span></li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (7.5%)</strong><span class="text-muted small">₦{{ Cart::getContent()->count() > 0 ? Cart::getCondition('VAT 7.5%')->getCalculatedValue(Cart::getSubTotal()) : 0.0 }}</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">VAT (6.0%)</strong><span class="text-muted small">₦{{ Cart::getContent()->count() > 0 ? Cart::getCondition('VAT 6.0%')->getCalculatedValue(Cart::getSubTotal()) : 0.0 }}</span></li>
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₦{{ Cart::getTotal() }}</span></li>
                     <li>

@@ -44,10 +44,10 @@ class CartController extends Controller
         \Cart::add($product->id, $product->name, $product->price, $quantity)->associate('App\Models\Products');
 
         $condition = new \Darryldecode\Cart\CartCondition(array(
-            'name' => 'VAT 7.5%',
+            'name' => 'VAT 6.0%',
             'type' => 'tax',
             'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
-            'value' => '7.5%',
+            'value' => '6.0%',
             'attributes' => array( // attributes field is optional
                 'description' => 'Value Added Tax',
             )

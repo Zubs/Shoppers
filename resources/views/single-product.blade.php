@@ -83,16 +83,16 @@
                   <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white"><span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
                     <div class="quantity">
                       <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                      <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
+                      <input class="form-control border-0 shadow-0 p-0" type="text" value="1" id="qty">
                       <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="#" onclick="event.preventDefault(); document.getElementById('form-{{ $product->id }}').submit();">Add to cart</a></div>
+                <div class="col-sm-3 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="#" onclick="document.getElementById('cart-qty').value = document.getElementById('qty').value; event.preventDefault(); document.getElementById('form-{{ $product->id }}').submit();">Add to cart</a></div>
                 <form action="{{ route('cart.store') }}" method="POST" id="form-{{ $product->id }}">
                   @csrf
                   <input type="hidden" name="id" value="{{ $product->id }}">
-                  <input type="hidden" name="quantity" value="1">
+                  <input type="hidden" name="quantity" value="1" id="cart-qty">
                 </form>
               </div><a class="btn btn-link text-dark p-0 mb-4" href="#"><i class="far fa-heart mr-2"></i>Add to wish list</a><br>
               <ul class="list-unstyled small d-inline-block">
