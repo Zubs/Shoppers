@@ -65,11 +65,12 @@
           <h2 class="h5 text-uppercase mb-4">Billing details</h2>
           <div class="row">
             <div class="col-lg-8">
-              <form action="#">
+              <form action="{{ route('checkout.done') }}" method="POST" id="billing-form">
+                @csrf
                 <div class="row">
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="firstName">First name</label>
-                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name">
+                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name" required>
                   </div>
                   <div class="col-lg-6 form-group">
                     <label class="text-small text-uppercase" for="lastName">Last name</label>
@@ -166,15 +167,6 @@
                       <script src="https://js.paystack.co/v1/inline.js"></script>
                       <button type="button" onclick="payWithPaystack()" class="btn btn-dark">Place order</button>
                     </form>
-
-                    <form action="{{ route('checkout.done') }}" id="donedeal" method="POST">
-                      @csrf
-                      <input type="hidden" name="message" value="" id="message">
-                      <input type="hidden" name="reference" value="" id="reference">
-                      <input type="hidden" name="status" value="" id="status">
-                      <input type="hidden" name="trans" value="" id="trans">
-                      <input type="hidden" name="trxref" value="" id="trxref">
-                    </form>
                      
                     <script>
                       function payWithPaystack(){
@@ -213,23 +205,19 @@
                               document.getElementById('status').value = response.status;
                               document.getElementById('trans').value = response.trans;
                               document.getElementById('trxref').value = response.trxref;
-                              document.getElementById('donedeal').submit();
+                              document.getElementById('billing-form').submit();
                           }
                         });
                         handler.openIframe();
                       }
                     </script>
-                    {{-- <form action="/process" method="POST" >
-                      <script
-                        src="https://js.paystack.co/v1/inline.js" 
-                        data-key="pk_test_221221122121"
-                        data-email="customer@email.com"
-                        data-amount="10000"
-                      >
-                      </script>
-                    </form> --}}
                   </div>
                 </div>
+                <input type="hidden" name="message" value="" id="message">
+                <input type="hidden" name="reference" value="" id="reference">
+                <input type="hidden" name="status" value="" id="status">
+                <input type="hidden" name="trans" value="" id="trans">
+                <input type="hidden" name="trxref" value="" id="trxref">
               </form>
             </div>
             <!-- ORDER SUMMARY-->
