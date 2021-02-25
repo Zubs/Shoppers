@@ -149,4 +149,10 @@
           </div>
         </section>
       </div>
+
+      <script>
+        (function () {
+          alert('hi');
+        })();
+      </script>
 @endsection
