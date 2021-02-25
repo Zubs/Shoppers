@@ -62,9 +62,12 @@
         </section>
         <section class="py-5">
           <!-- BILLING ADDRESS-->
-          @if(session()->has('error'))
+          @foreach($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+          @endforeach
+          {{-- @if(session()->has('error'))
             <div class="alert alert-danger">{{ session()->get('error') }}</div>
-          @endif
+          @endif --}}
           <h2 class="h5 text-uppercase mb-4">Billing details</h2>
           <div class="row">
             <div class="col-lg-8">
