@@ -11,6 +11,7 @@
 
 ### Extra Packages
 * [darryldecode/cart](https://github.com/darryldecode/laravelshoppingcart) to manage cart activities.
+* [Paystack Inline](https://docs-v1.paystack.com/docs/paystack-inline) to recieve payments and manage them without actually using the package.
 
 ## Author
 * [Zubair Idris Aweda]('https://zubs.github.io')
