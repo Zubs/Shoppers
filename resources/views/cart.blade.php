@@ -92,9 +92,7 @@
                         <td class="align-middle border-0">
                           <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                             <div class="quantity">
-                              <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                              <input id="item-quantity-{{ $product->id }}" class="form-control form-control-sm border-0 shadow-0 p-0 item-quantity" type="text" value="{{ $product->quantity }}"/>
-                              <button class="inc-btn p-0" onclick="addValue(event, 'item-quantity-{{ $product->id }}')"><i class="fas fa-caret-right"></i></button>
+                              <input id="item-quantity-{{ $product->id }}" class="form-control form-control-sm border-0 shadow-0 p-0 item-quantity" disabled type="text" value="{{ $product->quantity }}"/>
                             </div>
                           </div>
                         </td>
@@ -149,22 +147,4 @@
           </div>
         </section>
       </div>
-
-      <script>
-        const addValue = (event, id) => {
-          // Code here
-        };
-      </script>
-      <script src="{{ asset('js/app.js') }}"></script>
-      <script>
-        (function () {
-          const quantityNode = document.querySelectorAll('.item-quantity');
-
-          Array.from(quantityNode).forEach(function (element) {
-            element.addEventListener('change', function () {
-              alert('changed to ' + element.value);
-            })
-          })
-        })();
-      </script>
 @endsection
