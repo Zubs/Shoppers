@@ -170,7 +170,8 @@
                     </div>
                   @endauth
                   <div class="col-lg-12 form-group">
-                    <button class="btn btn-dark" type="submit">Place order</button>
+                    <button class="btn btn-dark mr-3" type="submit">Pay With Paystack</button>
+                    <button class="btn btn-dark" type="submit">Pay With Stripe</button>
                   </div>
                 </div>
                 <input type="hidden" name="message" value="" id="message">
@@ -181,9 +182,9 @@
                 <div class="col-lg-12 form-group">
                     <form action="/test" method="POST">
                       <script src="https://js.paystack.co/v1/inline.js"></script>
-                      <button onclick="payWithPaystack()" class="btn btn-dark" id="submit-billing" hidden>Place order</button>
+                      <button onclick="payWithPaystack()" class="btn btn-dark" id="submit-billing" hidden>Pay With Paystack</button>
                     </form>
-                     
+
                     <script>
                       function submitForm() {
                         // This lets me know if payment has been made. Yunno because the value is set from the payment response
@@ -198,7 +199,7 @@
                         return false;
                       };
 
-                      function payWithPaystack() { 
+                      function payWithPaystack() {
                         var handler = PaystackPop.setup({
                           key: 'pk_test_0e037ea69a1555fcf2f2001b54306b956ef7e07a',
                           email: document.getElementById('email').value,
